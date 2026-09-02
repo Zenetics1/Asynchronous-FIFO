@@ -1,4 +1,4 @@
-module fifo #(
+module memory #(
     parameter DATA_WIDTH = 8;
     parameter ADDR_WIDTH = 4;
 ) (
