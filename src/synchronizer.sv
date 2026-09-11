@@ -1,13 +1,13 @@
 module name #(
-    parameter ADDR_DEPTH = 4
+    parameter PTR_DEPTH = 3
 ) (
-    input logic [ADDR_DEPTH-1 : 0]   ptr_data_i,
+    input logic [PTR_DEPTH : 0]   ptr_data_i,
     input logic                      clk,
     input logic                      rst_n,
 
-    output logic [ADDR_DEPTH-1: 0]   ptr_data_o
+    output logic [PTR_DEPTH : 0]  ptr_data_o
 );
-    logic [ADDR_DEPTH-1: 0] ff_1;
+    logic [PTR_DEPTH-1: 0] ff_1;
 
     always_ff @(posedge clk) begin
         if (!rst_n) begin
