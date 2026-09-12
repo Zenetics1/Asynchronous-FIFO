@@ -8,7 +8,7 @@ module w_ptr_handler #(
 
     output logic                 full,
     output logic [PTR_DEPTH : 0] b_wptr,
-    output logic [PTR_DEPTH : 0] g_wptr,
+    output logic [PTR_DEPTH : 0] g_wptr
 );
     logic [PTR_DEPTH : 0] b_wptr_next;
     logic [PTR_DEPTH : 0] g_wptr_next;

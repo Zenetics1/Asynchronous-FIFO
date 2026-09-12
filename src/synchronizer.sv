@@ -2,8 +2,8 @@ module name #(
     parameter PTR_DEPTH = 3
 ) (
     input logic [PTR_DEPTH : 0]   ptr_data_i,
-    input logic                      clk,
-    input logic                      rst_n,
+    input logic                   clk,
+    input logic                   rst_n,
 
     output logic [PTR_DEPTH : 0]  ptr_data_o
 );
