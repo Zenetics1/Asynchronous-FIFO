@@ -3,17 +3,15 @@ module top_module #(
               ADDR_DEPTH = 8, 
               PTR_DEPTH = 3
 ) (
-    input logic [DATA_WIDTH-1 : 0]  data_in,
+    input logic [DATA_DEPTH-1 : 0]  data_in,
     input logic                     w_en,
     input logic                     wrst_n,
     input logic                     w_clk,
-    input logic                     w_rst,
 
     input logic                     r_en,
     input logic                     rrst_n,
     input logic                     r_clk,
-    input logic                     r_rst,
-    output logic [DATA_WIDTH-1 : 0] data_out
+    output logic [DATA_DEPTH-1 : 0] data_out
 
     output logic                    empty,
     output logic                    full
@@ -26,7 +24,7 @@ module top_module #(
     assign full = f_full;
     assign empty = f_empty;
 
-    w_ptr_handler #(.DATA_WIDTH(DATA_WIDTH), .ADDR_WIDTH(ADDR_WIDTH), .PTR_DEPTH(PTR_DEPTH)) w_ptr_h (
+    w_ptr_handler #(.DATA_DEPTH(DATA_DEPTH), .ADDR_DEPTH(ADDR_DEPTH), .PTR_DEPTH(PTR_DEPTH)) w_ptr_h (
         .wclk(w_clk),
         .wrst_n(wrst_n),
         .w_en(w_en),
@@ -36,7 +34,7 @@ module top_module #(
         .b_wptr(b_wptr),
         .g_wptr(g_wptr)
     );
-    r_ptr_handler #(.DATA_WIDTH(DATA_WIDTH), .ADDR_WIDTH(ADDR_WIDTH), .PTR_DEPTH(PTR_DEPTH)) r_ptr_h (
+    r_ptr_handler #(.DATA_DEPTH(DATA_DEPTH), .ADDR_DEPTH(ADDR_DEPTH), .PTR_DEPTH(PTR_DEPTH)) r_ptr_h (
         .rclk(r_clk),
         .rrst_n(rrst_n),
         .r_en(r_en),
@@ -61,7 +59,7 @@ module top_module #(
         .ptr_data_o(g_rptr_sync)
     );
 
-    memory #(.DATA_WIDTH(DATA_WIDTH), .ADDR_WIDTH(ADDR_WIDTH), .PTR_DEPTH(PTR_DEPTH)) mem (
+    memory #(.DATA_DEPTH(DATA_WIDTH), .ADDR_DEPTH(ADDR_WIDTH), .PTR_DEPTH(PTR_DEPTH)) mem (
         .i_data(data_in),
         .w_en(w_en),
         .w_clk(w_clk),

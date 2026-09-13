@@ -9,6 +9,7 @@ module name #(
 );
     logic [PTR_DEPTH-1: 0] ff_1;
 
+    //Two block shift register to handle CDC and metastability
     always_ff @(posedge clk) begin
         if (!rst_n) begin
             ff_1 <= '0;

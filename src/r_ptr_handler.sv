@@ -15,11 +15,14 @@ module r_ptr_handler #(
     logic [PTR_DEPTH : 0] g_rptr_next;
     logic                 rempty;
 
+    //Move read pointer & convert to grey code equivalent
     assign b_rptr_next = b_rptr + (r_en & !empty);
     assign g_rptr_next = (b_rptr_next >> 1) ^ b_rptr_next;
 
+    //Flag if fifo is empty, ptrs at same location
     assign rempty = (g_wptr_sync == g_rptr_next);
 
+    //Update present ptrs with next ptrs
     always_ff @(posedge rclk or negedge rrst_n ) begin        
         if (!rrst_n) begin
             b_rptr <= '0;
@@ -30,6 +33,7 @@ module r_ptr_handler #(
         end
     end
 
+    //Update empty flag
     always_ff @(posedge rclk or negedge rrst_n) begin
         if(!rrst_n) begin
             empty <= 1'b1;

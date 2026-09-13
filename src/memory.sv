@@ -17,15 +17,17 @@ module memory #(
     output logic [DATA_DEPTH-1 : 0] o_data
 );
     
+    //8-bit words, 8 addresses
     logic [DATA_WIDTH-1 : 0] fifo [0 : DEPTH-1];
 
+    //Write data to memory address
     always_ff @(posedge w_clk) begin :
         if (w_en & !full) begin
             fifo[b_wptr[PTR_DEPTH-1 : 0]] <= i_data; 
         end
     end
 
-
+    //Read data from memory address
     always_ff @(posedge r_clk) begin : 
         if (r_en & !empty) begin
             o_data <= fifo[b_rptr[PTR_DEPTH-1 : 0]];
